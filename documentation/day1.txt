@@ -1,0 +1,87 @@
+Day 1 - Cybersecurity fundamentals
+-----
+THE CIA TRIAD
+The CIA triad provides guidance on how to best setup a secure system
+
+C. confidentiality
+  How an organization protects and controls the access of data
+  Solutions:
+    Multi factor authorization
+    Encryption of data
+    Data classification and labeling
+    
+I. integrity
+  Organizaions reputation and authenticity
+  The trust between user and org
+  Solutions:
+    hashing
+    digital encryption
+    digital certs/signatures
+
+A. availability
+  How fast and acceessible system and data is 
+  What if system goes down? How fast can you provide backup and running service?
+
+Threat vs. Vulnerability vs. Exploit
+
+A threat is a danger that can take advantage of a system's vulnerability
+A vulnerablility is a weakness or hole in a system that allows a threat to exploit the system
+An exploit is the tool used (code/malware) that directly attacks system 
+
+LINUX TOOLS
+netstat 
+  common flags
+    -nr (network table) shows the direction of the flow of data packets in device
+    -tulnp
+    -aon shows all connections with addresses, ports, and process ids
+
+NETWORKING (configuring Kali and Windows machine Internal network)
+
+NAT vs Internal network
+NAT creates seperate network with host device to each virtual machine (internet access is through host [host acts like router])
+--------           -------
+| Kali |           | WIN |
+--------           -------
+   |     --------     |
+   |---> | Host | <---|
+         --------
+Internal network creates seperate network from host with only devices setup in network (no internet access)
+--------           -------
+| Kali | --------> | WIN |
+--------           -------
+        --------
+        | Host |
+        --------
+
+Steps
+  1.) Open virtual box GUI
+    1.a) Right click on windows virtual machine icon 
+    1.b) Click the settings for selected machine and navigate to Network tab on left menu bar
+    1.c) Under Adabper 1, select "Attached to" drop down bar
+    1.d) Select Internal network option and create a name for network under name dropdown
+    1.e) Repeat steps 1.a - 1.c for the Kali machine
+    1.f) Select Internal network option and instread of creating name, select name created from windown machine in step 1.d
+  2.) Setup manual IPv4 addresses for both machines by starting up both machines
+    2.a) In windows 
+      2.a.1) Right click no internet icon on bottom left menu bar
+      2.a.2) Scroll until "advanced network settings" and click change adapter options
+      2.a.3) Right click ethenet and select properties
+      2.a.4) Select "Internet Protocol Version 4" in the connection options and go to its properties
+      2.a.5) Select "Use the following IP address" and put appropriate IP address (192.168.y.x) 
+      2.a.6) Subnet mask 255.255.255.0 and select ok
+      2.a.7) In the taskbar, open command prompt in search and use command ipconfig to verify manual address
+    2.b) In Kali
+      2.b.1) Right click ethernet icon in top right task bar
+      2.b.2) Select "Edit Connections"
+      2.b.3) Double click Wired connection 1 
+      2.b.4) Go to IPv4 Settings tab and in the method dropdown, select Manual
+      2.b.5) Under the "Addresses" section, add new address by clicking add button
+      2.b.6) Input appropriate address (192.168.y.x+1) and leave Netmask as 24 and Gateway empty
+      2.b.7) Click "Save" and restart the machine (IMPORTANT as ethenet settings did not update)
+      2.b.8) Open Kali again
+      2.b.9) Open the terminal and use command ifconfig to verify address
+  3.) Open windows command prompt in Windows machine
+  4.) Use the ping command on Kali machine's new manaul IP address to verify network connection
+
+
+
