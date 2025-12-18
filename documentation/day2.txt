@@ -1,0 +1,40 @@
+Day 2 - Testing Tools and Sandbox Network
+------------------------------------------
+
+Learning nmap tool with kali on windows machine.
+
+
+Read RFC 793 (Transmission Control Protocol)
+    Here are the principle in TCP
+
+    Basic Data Transfer : 
+        packets = string of octets
+    
+    Reliability :
+        each octet has sequence number used for two things
+            1.) Used to verify reciever recieved octet. Sends ACK (+ acknowledgement).
+                If ACK not recieved in certain time interval, all packets are sent back.
+            2.) Checks to make sure no duplicates and orders octets in correct order of data.
+                KERNEL LEVEL OF RECIEVER 
+                    TCP places data in buffer then ACK is sent
+                    Sits in buffer until user level executes a read() on socket
+                    Data copied from kernel space to user space
+                    If buffer gets full, sender stops sending packets
+    
+    Flow Control :
+        "window" of history of ACK sent to sender with each received packet
+        "window" determines how much space in buffer and when sender needs to stop sending
+        the TRAFFIC CONTROL
+
+    Multiplexing :
+        Sockets allow multiple processes to access TCP
+        Multiple addresses and ports on host connect to different Sockets
+        EX
+            Multiple clients can access same port on server because connection is unique (unique 4tuple since client's addresses differ)
+            TCP can distiguish different connections ^
+
+    Connections : 
+        (socket1) -----> (socket2) + sequence #s + window sizes  =  connection
+        handshake mechanism (ACK?) is required to confirm packet # sequence using timer
+
+
