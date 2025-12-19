@@ -1,0 +1,13 @@
+Day 3 - Recon Tools
+-------------------
+
+NetCat (nc) vs Netstat 
+
+    nc is swiss army knife of TCP and  UDP protocols
+    nc <host> <port> is general use case to create connection
+
+Created Diagram of Active directory network
+
+also got my used hp elitedesk mini pc but realized i truly do not need it when my laptop has better hardware and virtual box
+Ill find a use for it eventally
+    maybe create home server
