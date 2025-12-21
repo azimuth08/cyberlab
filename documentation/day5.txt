@@ -1,0 +1,29 @@
+Day 5 - Installing Splunk and configuring other machines
+----------------------------------------------------------
+
+Once Ubuntu servers can connect to the internet, follow the steps to get splunk onto machines
+    1.) Download splunk trial for linux into project folder
+        1.1) go to splunk.com
+        1.2) navigate to trials and downloads and select Splunk enterprise start trial
+        1.3) select the linux option and download the .deb extentsion into project Directory
+    2.) Create shared folder with host's project directory to access splunk installer
+        2.1) sudo apt-get install virtualbox-guestadditions-iso 
+        2.2) sudo reboot
+        2.3) sudo apt-get install virtualbox-guest-utils (downloads vboxsf tool)
+        2.4) sudo reboot
+        2.5) in home directory : mkdir shared
+        2.6) sudo addusr myad vboxsf (creates user of myad with vboxsf as group)
+        2.7) sudo mount -t vboxsf -o uid=1000,guid=1000 <sf project directory name> share/
+    3.) install splunk executable from shared folder
+        3.1) sudo spkg -i {tab} 
+    4.) execute splunk 
+        4.1) cd /opt/splunk
+        4.2) sudo -u splunk bash (sudo as splunk user and execute bash)
+        4.3) cd bin
+        4.4) ./splunk start 
+        4.5) accept license and create user and pass
+    5.) Configure splunk to init on boot
+        5.1) exit 
+        5.2) cd /opt/splunk/bin
+        5.3) sudo ./splunk enable boot-start -user splunk
+        
