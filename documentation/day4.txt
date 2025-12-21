@@ -1,0 +1,39 @@
+Day 4 - Setting up Active Directory Homelab
+--------------------------------------------
+
+Dowloaded two server machines/OS ISO
+
+Windows Server 2022 - Active Directory
+Ubuntu Server 24.0 - Splunk server
+
+Learned what /x means after internet protocol Address
+    IPv4 = 32 bits
+    /24 = 24 bits reserved for address and 8 bits for local network (can have up to 256 devices in local network)
+
+Created NAT (Network Address Translation) Network (refer to diagram in root folder)
+    Host (laptop) - router
+    Nat device - switch (192.168.20.0/24)
+    Ubuntu server  
+        in /etc/netplan folder is a .yaml file for configuring network settings
+        changed to below
+
+            network:
+            version: 2
+            ethernets:
+                enp0s3:
+                dhcp4: no
+                addresses: [192.168.20.10/24]
+                nameservers:
+                    addresses: [8.8.8.8]       #google's dns
+                routes:
+                    - to: default
+                    via: 192.168.20.1
+        sudo netplan apply to apply configurations
+
+        *problem*
+        cannot ping google.com 
+        recieve - ping: google.com: Temporary failure in name resolution
+        
+
+
+
