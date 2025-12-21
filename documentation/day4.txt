@@ -33,7 +33,7 @@ Created NAT (Network Address Translation) Network (refer to diagram in root fold
         *problem*
         cannot ping google.com 
         recieve - ping: google.com: Temporary failure in name resolution
-        
-
+            cannot also connect to static default gateway address (192.168.20.1)
+            chance gateway is incorrect (if so update yaml file with correct one)
 
 
