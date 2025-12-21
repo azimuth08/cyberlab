@@ -36,4 +36,7 @@ Created NAT (Network Address Translation) Network (refer to diagram in root fold
             cannot also connect to static default gateway address (192.168.20.1)
             chance gateway is incorrect (if so update yaml file with correct one)
 
-
+Day 5 - fixed the name resolution error
+------------------------------------------
+if you can ping to self and ping to google with NAT, then the next thing to check is if vbox is updated to latest version.
+Updating fixed the resolution error, and I was able to connect to the internet with my NAT network and static IP
