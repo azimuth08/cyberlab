@@ -36,7 +36,11 @@ Setup Splunk with Windows Target Machine (Splunk forwarder - sends data to Splun
     2.1) In ethernet properties, enter IPv4 properties
     2.2) Click the advanced button at the bottom and navigate to DNS tab and enter corresponding DNS addresses (8.8.8.8 and 8.8.4.4)
 3.) Download and configure Splunk 
-    3.1) Navifate to splunk.com -> click downloads and trials -> Universal Forwarder -> windows 64 bit and download
+    3.1) Navigate to splunk.com -> click downloads and trials -> Universal Forwarder -> windows 64 bit and download
+    3.2) Open installer
+    3.3) Continue next until username (create whatever) and generate random password
+    3.4) Continue with next until recieving address and port
+    3.5) Enter Splunk server address and default port num 9997
 4.) Download Sysmon (logger for window's events) and the config file (make sure to download all files to same folder. I did in downloads)
     4.1) enter sysmon in search and go to microsoft's document page
     4.2) Click "Download Sysmon"
