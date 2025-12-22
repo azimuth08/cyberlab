@@ -27,3 +27,48 @@ Once Ubuntu servers can connect to the internet, follow the steps to get splunk 
         5.2) cd /opt/splunk/bin
         5.3) sudo ./splunk enable boot-start -user splunk
         
+Setup Splunk with Windows Target Machine (Splunk forwarder - sends data to Splunk server)
+
+1.) Follow steps for setting static ip from day 1 (modify ip address as needed)
+
+* Ran into issues with no connectivity to internet, turns out defualt gateway address was not set up*
+2.) Set up default gateway and DNS addreesses
+    2.1) In ethernet properties, enter IPv4 properties
+    2.2) Click the advanced button at the bottom and navigate to DNS tab and enter corresponding DNS addresses (8.8.8.8 and 8.8.4.4)
+3.) Download and configure Splunk 
+    3.1) Navifate to splunk.com -> click downloads and trials -> Universal Forwarder -> windows 64 bit and download
+4.) Download Sysmon (logger for window's events) and the config file (make sure to download all files to same folder. I did in downloads)
+    4.1) enter sysmon in search and go to microsoft's document page
+    4.2) Click "Download Sysmon"
+    4.3) save as following link https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml 
+    4.4) extract zip file and copy path of extracted folder
+    4.5) enter powershell and cd into path copied from step 4.3
+    4.6) execute command './Sysmon64.exe -i ../sysmonconfig.xml
+5.) Configire input file for forwarder (tells universal forwarder, i.e. windows, machine what to send)
+    5.1) navigate to C:\\Program Files\SplunkUniversalForwarder\etc\system\default
+    5.2) * IMPORTANT * do no modify anything in this dir
+            only copy the inputs.conf file
+    5.3) cd ../local and paste the conf file
+    5.4) copy https://github.com/MyDFIR/Active-Directory-Project and replace file with paste
+            (tells splunk what logs go to which indexes in server)
+    5.5) * IMPORTANT * everytime inputs.conf is modified, service must be reset
+    5.6) Find SplunkForwarder in Services app
+    5.7) If "Log On As" is set to something other than "Local System
+        5.7.1) go to SplunkForwarder's properties
+        5.7.2) under "Log On" tab, select "Local System Account"
+    5.8) Stop and reset the service
+6.) Modify Splunk's index and data routing
+    6.1) In the browser, lookup Splunk's servers address with port 8000
+    6.2) Log into splunk account
+    6.3) Find the settings at top tab and select "Index" 
+    6.4) Click on "New Index" at top right corner
+    6.5) name endpoint and save
+7.) Enable Splunk server to recieve data
+    7.1) Select settings again and under Data select "Forwarding and Recieving"
+    7.2) Click on "configure recieving"
+    7.3) Click on "New Recieving Port"
+    7.4) enter 9997 as default port and enter save
+    7.5) Click on apps from top menu and click on search
+8.) Verify data is being recieved
+    8.1) Under search bar enter index=endpoint
+    8.2) search and verify logs are being sent
