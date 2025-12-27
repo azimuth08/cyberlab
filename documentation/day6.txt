@@ -1,0 +1,56 @@
+Day 6 - Setting up Active Directory Domain Service
+--------------------------------------------------
+
+1.) Install Active Directory Domain Services (AD DS) Role
+    1.1) Open Server Manager (launches automatically on login).
+    1.2) Click Manage → Add Roles and Features.
+    1.3) Choose Role-based or feature-based installation → click Next.
+    1.4) Select your local server → click Next.
+    1.5) Under Server Roles, check Active Directory Domain Services.
+    1.6) When prompted, click Add Features → then Next.
+    1.7) Skip Features page (defaults are fine) → click Next.
+    1.8) Review summary → click Install.
+    1.9) Wait for installation to finish (no reboot yet).
+2.) Promote the Server to a Domain Controller
+    2.1) In Server Manager, click the yellow flag icon → select Promote this server to a domain controller.
+    2.2) Choose Add a new forest → enter your domain name, e.g. mydomain.local.
+    2.3) Set a Directory Services Restore Mode (DSRM) password → click Next.
+    2.4) Leave defaults for DNS options → click Next.
+    2.5) On Additional Options, note the NetBIOS name (usually MYDOMAIN).
+    2.6) Accept Database, Log, and SYSVOL paths defaults → click Next. (These files are important as they hold all the information 
+                                                                        about Domain. If these are breached, whole domain is compromised)
+    2.7) Review summary → click Install.
+    2.8) Server will reboot automatically after installation.
+3.) Verify Domain Controller Configuration
+    3.1) Log in using your domain credentials (e.g. MYDOMAIN\Administrator).
+    3.2) Open Server Manager → Tools → Active Directory Users and Computers.
+    3.3) Confirm your domain (mydomain.local) appears.
+    3.4) Expand domain → right-click and create Organizational Units (OUs) like:
+        - Users
+        - Computers
+        - Servers
+    3.5) Open Tools → DNS → confirm DNS zone created for your domain.
+4.) Add a Client Machine to the Domain
+    4.1) On the Windows client machine, open Settings → System → About → Rename this PC (advanced).
+    4.2) Under Computer Name → Change, select Domain and enter mydomain.local.
+    4.3) When prompted, enter domain admin credentials (Administrator + password).
+    4.4) If successful, you’ll see a “Welcome to the domain” message.
+    4.5) Restart the client machine.
+    4.6) Log in using domain credentials (MYDOMAIN\username).
+5.) Create Domain Users and Groups under new Organizational Units
+    5.1) Right click next to folders and select "Organizational Unit"
+    5.2) create new unit and open up folder
+    5.3) Right-click → New → User.
+    5.4) Fill in details (e.g., FirstName: John, User logon name: jdoe).
+    5.5) Assign a password and choose whether user must change it at next login.
+    5.6) Create groups as needed (e.g. IT, HR, Admins) and assign users to them.
+6.) Enable Remote Desktop and Basic Administration Tools
+    6.1) Open Server Manager → Local Server → Remote Desktop.
+    6.2) Enable “Allow remote connections to this computer.”
+    6.3) Add Domain Admins group to allowed users.
+    6.4) Install additional RSAT tools if needed via Add Roles and Features → Features → Remote Server Administration Tools.
+7.) Backup and Test Domain Controller
+    7.1) Use Windows Server Backup to take a system state backup.
+    7.2) Test user logins on the client PC.
+    7.3) Test ping mydomain.local and nslookup mydomain.local from both machines.
+    7.4) Verify time synchronization between server and client.
